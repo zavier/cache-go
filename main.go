@@ -2,10 +2,12 @@ package main
 
 import (
 	"./cache"
+	"./httpserver"
 	"./server"
 )
 
 func main() {
-	c := cache.New("inmemory")
-	server.New(c).Listen()
+	ca := cache.New("inmemory")
+	go server.New(ca).Listen()
+	httpserver.New(ca).Listen()
 }
